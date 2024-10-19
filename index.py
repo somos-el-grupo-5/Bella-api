@@ -42,16 +42,34 @@ def lips(image, parsing, part=12, color=[230, 50, 20]):
     changed[parsing != part] = image[parsing != part]
     return changed
 
+def eyebrow(image, parsing, part=2, color=[230, 50, 20]):
+    b, g, r = color
+    tar_color = np.zeros_like(image)
+    tar_color[:, :, 0] = b
+    tar_color[:, :, 1] = g
+    tar_color[:, :, 2] = r
+    
+    image_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    tar_hsv = cv2.cvtColor(tar_color, cv2.COLOR_BGR2HSV)
+    image_hsv[:, :, 0:1] = tar_hsv[:, :, 0:1]
+    
+    changed = cv2.cvtColor(image_hsv, cv2.COLOR_HSV2BGR)
+    changed[parsing != part] = image[parsing != part]
+    
+    return changed
+
 @app.route('/process-image', methods=['POST'])
 def process_image():
-    if 'image' not in request.files or 'lip_color' not in request.form:
+    if 'image' not in request.files or 'lip_color' not in request.form or 'eyebrow_color' not in request.form :
         return jsonify({"error": "Faltan parámetros requeridos"}), 400
 
     img_file = request.files['image']
     lip_color_hex = request.form['lip_color']
+    eyebrow_color_hex = request.form['eyebrow_color']
 
     # Convertir colores hexadecimales a RGB
     lip_color = ImageColor.getcolor(lip_color_hex, "RGB")
+    eyebrow_color = ImageColor.getcolor(eyebrow_color_hex, "RGB")
     
     # Cargar la imagen
     image = np.array(Image.open(img_file))
@@ -70,6 +88,14 @@ def process_image():
     
     part = 13  # Labio inferior
     image = lips(image, parsing, part, lip_color)
+    
+    # Para ceja izquierda
+    part = 2  # Left eyebrow
+    image = eyebrow(image, parsing, part, eyebrow_color)
+
+    # Para ceja derecha
+    part = 3  # Right eyebrow
+    image = eyebrow(image, parsing, part, eyebrow_color)
 
     image = cv2.resize(image, (w, h))
 

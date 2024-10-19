@@ -1,55 +1,76 @@
-# face-makeup.PyTorch
-Lip and hair color editor using face parsing maps.
+<div align="center">
+  <img src="./assets/logo.png" alt="Logo" height="180">
+  <h3 align="center">Bella API - Belcorp Hackathon</h3>
+  <p>Grupo 5 · 2024</p>
+</div>
 
-<table>
+# Bella API
 
-<tr>
-<th>&nbsp;</th>
-<th>Hair</th>
-<th>Lip</th>
-</tr>
+Bella is an artificial intelligence chatbot designed to transform the personalized beauty experience through messaging platforms, such as WhatsApp. This digital assistant allows users to receive beauty product recommendations, facial analysis, and personalized advice without the need for additional apps or augmented reality experiences. Additionally, the Bella API connects users to facial analysis features, allowing clients to virtually try on Belcorp products.
 
-<!-- Line 1: Original Input -->
-<tr>
-<td><em>Original Input</em></td>
-<td><img src="makeup/116_ori.png" height="256" width="256" alt="Original Input"></td>
-<td><img src="makeup/116_lip_ori.png" height="256" width="256" alt="Original Input"></td>
-</tr>
+## Table of Contents
 
-<!-- Line 2: Color -->
-<tr>
-<td >Color</td>
-<td><img src="makeup/116_0.png" height="256" width="256" alt="Color"></td>
-<td><img src="makeup/116_6.png" height="256" width="256" alt="Color"></td>
-</tr>
+- [Bella API](#bella-api)
+  - [Table of Contents](#table-of-contents)
+  - [Meet the Team](#meet-the-team)
+  - [Features](#features)
+  - [Installation](#installation)
+    - [Clone the repository](#clone-the-repository)
+    - [Create environment](#create-environment)
+    - [Install dependencies](#install-dependencies)
+    - [Run the server](#run-the-server)
+  - [Results](#results)
 
-<!-- Line 3: Color -->
-<tr>
-<td>Color</td>
-<td><img src="makeup/116_1.png" height="256" width="256" alt="Color"></td>
-<td><img src="makeup/116_3.png" height="256" width="256" alt="Color"></td>
-</tr>
+## Meet the Team
 
-<!-- Line 4: Color -->
-<tr>
-<td>Color</td>
-<td><img src="makeup/116_2.png" height="256" width="256" alt="Color"></td>
-<td><img src="makeup/116_4.png" height="256" width="256" alt="Color"></td>
-</tr>
+| Members         |
+| --------------- |
+| Camilla Navinta |
+| Leonel Ortega   |
+| Lucas Ruiz      |
+| Stevens Acha    |
+| Oliver Tuesta   |
 
-</table>
+## Features
 
-### Using PyTorch 1.0 and python 3.x
+- Personalized beauty product recommendations
+- Facial analysis
+- Customized advice without additional apps
+- Easy integration with messaging platforms like WhatsApp
+- Empowering experience for the user
 
-## Demo
-Change hair and lip color:
-```Shell
-python makeup.py --img-path imgs/116.jpg
+## Installation
+
+To install the Bella API, clone the repository and follow the steps below.
+
+### Clone the repository
+
+```bash
+git clone https://github.com/somos-el-grupo-5/Bella-api.git
 ```
-### Try to use other colors:
-Change the color list in **makeup.py**(line 83)
+
+### Create environment
+
+```bash
+cd bella-api
+python -m venv venv
+source venv/bin/activate
 ```
-colors = [[230, 50, 20], [20, 70, 180], [20, 70, 180]]
+
+### Install dependencies
+
+```bash
+pip install -r requirements.txt
 ```
-### Train face parsing model (optional)
-Follow this repo [zllrunning/face-parsing.PyTorch](https://github.com/zllrunning/face-parsing.PyTorch)
+
+### Run the server
+
+```bash
+python3 index.py
+```
+
+## Results
+
+![Screenshot 1](./assets/1.png)
+
+**2024 © Grupo 5 - All rights reserved**

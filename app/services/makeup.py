@@ -3,7 +3,7 @@ import cv2
 import os
 import numpy as np
 from skimage.filters import gaussian
-from test import evaluate
+from app.test.test import evaluate
 import argparse
 
 
@@ -72,7 +72,7 @@ if __name__ == '__main__':
     }
 
     image_path = args.img_path
-    cp = 'cp/79999_iter.pth'
+    cp = os.path.join(os.path.dirname(__file__), '../cp/79999_iter.pth')
 
     image = cv2.imread(image_path)
     ori = image.copy()
@@ -86,7 +86,6 @@ if __name__ == '__main__':
     for part, color in zip(parts, colors):
         image = hair(image, parsing, part, color)
 
-    #cv2.imshow('image', cv2.resize(ori, (512, 512)))
     cv2.imshow('color', cv2.resize(image, (512, 512)))
 
     cv2.waitKey(0)

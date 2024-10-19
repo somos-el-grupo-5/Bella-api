@@ -4,7 +4,7 @@
 
 import torch
 import os
-from model import BiSeNet
+from app.models.model import BiSeNet
 import os.path as osp
 import numpy as np
 from PIL import Image
@@ -37,7 +37,6 @@ def vis_parsing_maps(im, parsing_anno, stride, save_im=False, save_path='vis_res
         vis_parsing_anno_color[index[0], index[1], :] = part_colors[pi]
 
     vis_parsing_anno_color = vis_parsing_anno_color.astype(np.uint8)
-    # print(vis_parsing_anno_color.shape, vis_im.shape)
     vis_im = cv2.addWeighted(cv2.cvtColor(vis_im, cv2.COLOR_RGB2BGR), 0.4, vis_parsing_anno_color, 0.6, 0)
 
     # Save result or not
@@ -48,15 +47,10 @@ def vis_parsing_maps(im, parsing_anno, stride, save_im=False, save_path='vis_res
     # return vis_im
 
 
-def evaluate(image_path='./imgs/116.jpg', cp='cp/79999_iter.pth'):
-
-    # if not os.path.exists(respth):
-    #     os.makedirs(respth)
+def evaluate(image_path='./imgs/116.jpg', cp = os.path.join(os.path.dirname(__file__), '../cp/79999_iter.pth')):
 
     n_classes = 19
     net = BiSeNet(n_classes=n_classes)
-    #net.cuda()
-    #net.load_state_dict(torch.load(cp))
     net.load_state_dict(torch.load(cp, map_location=torch.device('cpu')))
     net.eval()
 
